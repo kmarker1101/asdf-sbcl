@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for sbcl.
-GH_REPO="https://sourceforge.net/projects/sbcl/files/sbcl/"
+GH_REPO="https://github.com/sbcl/sbcl"
 TOOL_NAME="sbcl"
 TOOL_TEST="sbcl --help"
 
