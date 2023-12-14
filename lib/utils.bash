@@ -4,6 +4,7 @@ set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for sbcl.
 GH_REPO="https://github.com/sbcl/sbcl"
+FORGE_REPO="https://sourceforge.net/projects/sbcl/files/sbcl"
 TOOL_NAME="sbcl"
 TOOL_TEST="sbcl --help"
 
@@ -42,7 +43,7 @@ download_release() {
 	filename="$2"
 
 	# TODO: Adapt the release URL convention for sbcl
-	url="$GH_REPO/archive/refs/tags/${version}.tar.gz"
+	url="$FORGE_REPO/${version}.tar.gz"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
@@ -60,6 +61,8 @@ install_version() {
 	(
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+		cd "$install_path"
+		tar -xf "sbcl.${version}.tar.gz"
 
 		# TODO: Assert sbcl executable exists.
 		local tool_cmd
